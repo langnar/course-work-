@@ -18,10 +18,16 @@ class List extends PureComponent {
     items: []
   };
 
+  componentDidMount(){
+    this.props.fetchLoad();
+}
+
+
   render() {
-    const { items, remove, edit, allVideos } = this.props;
+    const { items, remove, edit, allVideos, addToFav } = this.props;
+    console.log(items)
     const list = items.map(item => (
-      <ListItem key={item.id} {...item} removeVideo={remove} editVideo={edit} />
+      <ListItem key={item.id} {...item} removeVideo={remove} editVideo={edit} addToFavor={addToFav}/>
     ));
 
     return (

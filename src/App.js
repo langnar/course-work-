@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import logo from "./logo.svg";
 import "./App.css";
 import List from "./containers/List";
 import Form from "./containers/Form";
@@ -14,8 +13,11 @@ class App extends Component {
     return (
       <Provider store={store}>
         <div className="App">
-          search by title: <Search searchField="title" />
-          search by tag: <Search searchField="tags" />
+        <div className="search">
+        <Search searchField="title" />
+        <Search searchField="tags" />
+        </div>
+          
           <Form />
           <List />
         </div>
