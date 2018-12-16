@@ -1,11 +1,12 @@
 import { connect } from "react-redux";
 
 import Form from "../components/Form";
-import { addData } from "../reducers/videos";
+import { addData, showFavs } from "../reducers/videos";
 
 const mapDispatchToProps = dispatch => {
   return {
-    add: data => dispatch(addData(data))
+    add: data => dispatch(addData(data)),
+    // showFavs: () => dispatch(showFavs())
   };
 };
 

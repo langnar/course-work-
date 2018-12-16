@@ -1,5 +1,5 @@
 import React, { PureComponent } from "react";
-import { arrayOf, shape, string } from "prop-types";
+import { arrayOf, shape, string, bool } from "prop-types";
 import ListItem from "./ListItem";
 
 class List extends PureComponent {
@@ -9,7 +9,8 @@ class List extends PureComponent {
         id: string,
         title: string,
         url: string,
-        tags: string
+        tags: string,
+        isFavorites: bool
       })
     )
   };
@@ -31,11 +32,13 @@ class List extends PureComponent {
     ));
 
     return (
-      <ul>
-        <p>
+      <ul className="list">
+        <p className='list-counter'>
           Videos: {items.length}/{allVideos}
         </p>
-        {list}
+        <div className="list-item">
+          {list}
+        </div>
       </ul>
     );
   }

@@ -1,5 +1,5 @@
 import React, { PureComponent } from "react";
-import { arrayOf, shape, string } from "prop-types";
+import { arrayOf, shape, string, bool } from "prop-types";
 
 const getVideoId = (url='lol') => url.split("/")[3] || url.split("=")[1];
 const createVideoURL = id => `https://www.youtube.com/embed/${id}`;
@@ -11,7 +11,8 @@ class ListItem extends PureComponent {
         id: string,
         title: string,
         url: string,
-        tags: string
+        tags: string, 
+        isFavorites: bool
       })
     )
   };
@@ -40,30 +41,21 @@ class ListItem extends PureComponent {
   };
   
   addToFavorites = () => {
-    this.setState(state => ({isFavorites: !state.isFavorites}), ()=> {this.props.addToFavor(this.props.id, this.props.title, this.props.url, this.props.tags, this.state.isFavorites)})
-  }
-
-  // addToFavorites = () => {
-  //   this.props.addToFavor(this.props.id, this.state.title, this.props.url, this.state.tags, this.state.isFavorites);
-  // }
+    this.setState(
+      state => ({ isFavorites: !state.isFavorites }),
+      () => this.props.addToFavor(this.props.id, this.state.isFavorites)
+    );
+  };
 
   render() {
     const {id, title, url, tags, removeVideo} = this.props;
     const videoId = getVideoId(url);
     const videoUrl = createVideoURL(videoId);
 
+    const tagList = tags.split(" ").map(el => `#${el}`);
 
     return (
-      <li key={id}>
-        <button
-          onClick={() => {
-            removeVideo(id);
-          }}
-        >
-          x
-        </button>
-        <button onClick={this.switchStatus}>&#9998;</button>
-        <button onClick={this.addToFavorites}>fav</button>
+      <li key={id} className="card">
         {this.state.isEditing ? (
           <div>
             <button onClick={this.editItem}>&#9998;</button>
@@ -74,15 +66,28 @@ class ListItem extends PureComponent {
             />
           </div>
         ) : (
-          <div className="title">{title}</div>
+          <div className="card-title">{title}&#10024;</div>
         )}
 
-        <iframe src={videoUrl} title={title} />
+        <iframe className="video" src={videoUrl} title={title} />
         {this.state.isEditing ? (
           <input value={this.state.tags} name="tags" onChange={this.onChange} />
         ) : (
-          <p>{tags}</p>
+          <p className="tags">{tagList}</p>
         )}
+        <div className="card-btn">
+          <div className="btn-rm-container">
+            <i className="far fa-times-circle"  onClick={() => {
+                removeVideo(id);
+              } }></i>
+            <i className="fas fa-pencil-alt" onClick={this.switchStatus}></i>
+          </div>
+          {
+            this.state.isFavorites ? 
+            <i class="fas fa-star" onClick={this.addToFavorites}></i> : 
+            <i className="far fa-star" onClick={this.addToFavorites}></i>
+          }
+      </div>
       </li>
     );
   }

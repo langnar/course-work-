@@ -4,6 +4,7 @@ const REMOVE_VIDEO = "REMOVE_VIDEO";
 const FETCH_VIDEO = "FETCH_VIDEO";
 const FAV_VIDEO = "FAV_VIDEO";
 
+
 export default function videosReducer(state = [], action) {
   const { type, payload } = action;
 
@@ -12,9 +13,9 @@ export default function videosReducer(state = [], action) {
     case FETCH_VIDEO:
       return [...state, ...action.items];
 
-    case ADD_VIDEO:
+      case ADD_VIDEO:
       const newItem = {
-        id: Date.now().toString(),
+        id: payload.id,
         title: payload.title,
         url: payload.url,
         tags: payload.tags,
@@ -40,13 +41,12 @@ export default function videosReducer(state = [], action) {
       case FAV_VIDEO:
       return state.map(item => {
         if (item.id === payload.id) {
-          return { ...item, 
-            title: payload.title, 
-            url: payload.url, 
-            tags: payload.tags, 
-            isFavorites: payload.bool};
+          return {
+            ...item,
+            isFavorites: payload.isFavorites
+          };
         }
-      return item;
+        return item;
       });
 
     default:
@@ -54,9 +54,9 @@ export default function videosReducer(state = [], action) {
   }
 }
 
-export const addVideo = ({ title, url, tags }) => ({
+export const addVideo = ({ id, title, url, tags }) => ({
   type: ADD_VIDEO,
-  payload: { title, url, tags }
+  payload: { id, title, url, tags }
 });
 
 export const removeVideo = id => ({
@@ -76,9 +76,9 @@ export function itemsFetchDataSuccess(items) {
   };
 }
 
-export const favVideo = (id, title, url, tags, bool) => ({
+export const favVideo = (id, isFavorites) => ({
   type: FAV_VIDEO,
-  payload: {id, title, url, tags, bool}
+  payload: { id, isFavorites }
 });
 
 
@@ -90,17 +90,22 @@ export function itemsFetchData() {
   };
 }
 
+
 export function addData(data) {
-  return (dispatch) => {
-      fetch('http://localhost:3000/videos', {
-        headers: {
-          'content-type': 'application/json'
+  return dispatch => {
+    fetch("http://localhost:3000/videos", {
+      headers: {
+        "content-type": "application/json"
       },
-      method: 'POST',
+      method: "POST",
       body: JSON.stringify(data)
-      })
-          .then((response) => response.json())
-          .then((items) => dispatch(addVideo(items)))
+    })
+      .then(response => response.json())
+      .then(items => {
+        console.log(items);
+
+        dispatch(addVideo({ ...items }));
+      });
   };
 }
 
@@ -112,26 +117,32 @@ export function deleteData(id) {
   };
 }
 
-export function editData(id, title, newUrl, tags ) {
-  return (dispatch) => {
-      fetch(`http://localhost:3000/videos/${id}`, {
-       
-      method: 'PUT',
-      body: JSON.stringify({title, newUrl, tags })
+export function editData(id, title, newUrl, tags) {
+  return dispatch => {
+    fetch(`http://localhost:3000/videos/${id}`, {
+      method: "PATCH",
+      body: JSON.stringify({ title, newUrl, tags }),
+      headers: new Headers({
+        "Content-Type": "application/json"
       })
-          .then((response) => response.json())
-          .then((items) => dispatch(editVideo(id, title, newUrl, tags )))
+    })
+      .then(response => response.json())
+      .then(items => dispatch(editVideo(id, title, newUrl, tags)));
+  };
+}
+export function addToFav(id, isFavorites) {
+  return dispatch => {
+    fetch(`http://localhost:3000/videos/${id}`, {
+      method: "PATCH",
+      body: JSON.stringify({ isFavorites }),
+      headers: new Headers({
+        "Content-Type": "application/json"
+      })
+    })
+      .then(response => response.json())
+      .then(items => {
+        dispatch(favVideo(id, isFavorites));
+      });
   };
 }
 
-export function addToFav(id, title, newUrl, tags, bool) {
-  return (dispatch) => {
-      fetch(`http://localhost:3000/videos/${id}`, {
-       
-      method: 'PUT',
-      body: JSON.stringify({title, newUrl, tags, bool})
-      })
-          .then((response) => response.json())
-          .then((items) => dispatch(favVideo(id, title, newUrl, tags, bool)))
-  };
-}

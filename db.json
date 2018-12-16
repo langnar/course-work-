@@ -1,10 +1,39 @@
 {
   "videos": [
     {
-      "title": "asas",
-      "url": "asda",
-      "tags": "axdad",
-      "id": 1
+      "title": "dndn",
+      "url": "dndn",
+      "tags": "dndn",
+      "isFavorites": true,
+      "id": 3
+    },
+    {
+      "title": "ssjs",
+      "url": "sss",
+      "tags": "sss",
+      "isFavorites": false,
+      "id": 4
+    },
+    {
+      "title": "nssn",
+      "url": "ss",
+      "tags": "ss",
+      "isFavorites": false,
+      "id": 5
+    },
+    {
+      "title": "ssss",
+      "url": "sss",
+      "tags": "ssss",
+      "isFavorites": false,
+      "id": 6
+    },
+    {
+      "title": "ырры",
+      "url": "https://youtu.be/N5fCM8U4S4I",
+      "tags": "ыиы",
+      "isFavorites": false,
+      "id": 7
     }
   ]
 }

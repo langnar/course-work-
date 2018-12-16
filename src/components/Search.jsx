@@ -17,8 +17,8 @@ class Search extends PureComponent {
   render() {
     return (
       <div className='search'>
-        <span>Search by {this.props.searchField}:</span>
-        <input type="text" value={this.state.value} onChange={this.onChange} />
+        <span className='search-title'  >Search by {this.props.searchField}:</span>
+        <input className='input-header input-search' type="text" value={this.state.value} onChange={this.onChange} />
       </div>
       
     );

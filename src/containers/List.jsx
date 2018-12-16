@@ -15,7 +15,7 @@ const mapDispatchToProps = dispatch => {
     remove: id => dispatch(deleteData(id)),
     edit: (id, newTitle, newUrl, newTags) => dispatch(editData(id, newTitle, newUrl, newTags)),
     fetchLoad: () => dispatch(itemsFetchData()),
-    addToFav: (id, newTitle, newUrl, newTags, bool) => dispatch(addToFav(id,newTitle, newUrl, newTags, bool))
+    addToFav: (id, fav) => dispatch(addToFav(id, fav))
   };
 };
 

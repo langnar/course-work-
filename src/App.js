@@ -13,13 +13,24 @@ class App extends Component {
     return (
       <Provider store={store}>
         <div className="App">
-        <div className="search">
-        <Search searchField="title" />
-        <Search searchField="tags" />
-        </div>
-          
-          <Form />
-          <List />
+          <div className="header">
+            <div className='container'>
+            <div className="header-content">
+            <Form />
+              <div className="search">
+                <Search searchField="title"/>
+                <Search searchField="tags"/>
+              </div>
+              </div>
+             </div>
+          </div>
+            <div className="main">
+              <div className='container'>
+                <div className="main-content">
+                  <List />
+                </div>
+              </div>
+            </div>
         </div>
       </Provider>
     );

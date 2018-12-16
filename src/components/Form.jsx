@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import { func } from "prop-types";
 
-const initialValue = { title: "", url: "", tags: "" };
+const initialValue = { title: "", url: "", tags: "", isFavorites: false };
 
 class Form extends PureComponent {
   static propTypes = {
@@ -24,29 +24,36 @@ class Form extends PureComponent {
 
   render() {
     return (
-      <div>
-        <span>Title: </span>
-        <input
-          type="text"
-          name="title"
-          value={this.state.title}
-          onChange={this.onChange}
-        />
-        <span>URL: </span>
-        <input
-          type="text"
-          name="url"
-          value={this.state.url}
-          onChange={this.onChange}
-        />
-        <span>Tags: </span>
-        <input
-          type="text"
-          name="tags"
-          value={this.state.tags}
-          onChange={this.onChange}
-        />
-        <button onClick={this.onAdd}>Add</button>
+      <div className='form-input-container'>
+        <div className='group'>
+        <span className='group-title'>Title</span>
+          <input className="input-header" autocomplete="off"
+            type="text"
+            name="title"
+            value={this.state.title}
+            onChange={this.onChange}
+          />
+        </div>
+        <div className='group'>
+        <span className='group-title'>URL</span>
+          <input className="input-header" autocomplete="off"
+            type="text"
+            name="url"
+            value={this.state.url}
+            onChange={this.onChange}
+          />
+        </div>
+        <div className='group'>
+        <span className='group-title'>Tags</span>
+          <input className="input-header" autocomplete="off"
+            type="text"
+            name="tags"
+            value={this.state.tags}
+            onChange={this.onChange}
+          />
+        </div>
+        <i className="fas fa-check-circle" onClick={this.onAdd}></i>
+        
       </div>
     );
   }

@@ -42,13 +42,168 @@ table {
 	border-spacing: 0;
 }
 
+@import url('https://fonts.googleapis.com/css?family=Fira+Sans:300,400,600');
+
 /*============================================================*/
+html, body {
+	font-family: 'Fira Sans', sans-serif;
+	width: 100%;
+	height: 100%;
+	background-color: #925959;	
+	background-image: url('./style/christmas-colour.png');
+	font-size: 18px;
+}
+.App, .container{
+	height: 100%;
+}
 
 .container{
-  width: 100%;
+  margin: 0 auto;
+  width: 1150px;
+}
+
+.header{
+	background-color: #fff;
+	padding-bottom: 30px; 		
+}
+.header-content{
+  padding-top: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+	justify-content: space-around;
+  min-height: 100px;
 }
 
 .search {
   display: flex;
   justify-content: center;
+}
+
+.form-input-container{
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	margin-bottom: 15px;
+}
+.group{
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	margin-right: 10px; 
+}
+.group-title{
+	margin-bottom: 5	px;
+	color: rgb(202, 172, 172);
+}
+
+.input-header{
+	padding: 5px 5px 0;
+	outline: none;
+	border: none;
+	border-bottom: 1px dashed  rgb(202, 172, 172);
+	font-size: 18px;
+}
+.input-header:focus{
+	border-bottom: 1px dashed  rgb(131, 22, 22);
+	font-family: 'Fira Sans', sans-serif;
+	color: rgb(131, 22, 22);
+}
+
+.input-search{
+	width: 100px;
+}
+.fas.fa-check-circle{
+	font-size: 30px;
+	color: rgba(98, 82, 82, 0.719);
+}
+
+.fas.fa-check-circle:hover{
+	cursor: pointer;
+	color: rgb(131, 22, 22);
+}
+.search-title {
+	color: rgb(131, 22, 22);
+}
+
+/* ====================Main================================== */
+.main{
+	height: 100%;
+}
+.main-content{
+	background-color: rgba(255, 255, 255, 0.794);
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: wrap;
+	min-height: 620px;
+}
+
+.list{
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center;	
+	width: 100%;
+}
+
+.list-counter {
+	background-color: #fff;
+	width: 150px;
+	height: 40px;
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+	text-align: center;
+	line-height: 2;
+	color: rgb(131, 22, 22);
+}
+
+.list-item {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-around;
+}
+
+.card{
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+	background-color: #fff;
+	border-radius: 5px;
+	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+	transition: 0.3s;
+	margin: 10px;
+	width: 400px;
+}
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.fas.fa-star {
+	color: rgb(255, 215, 0);
+}
+
+.card-title{
+	padding-top: 5px;
+	margin-bottom: 5px;
+}
+.tags{
+	font-size: 14px;
+	color: #9e6666;
+	margin-bottom: 10px;	
+}
+
+.video {
+	margin-bottom: 10px; 
+	width: 100%;
+	height: 250px;
+}
+
+.card-btn{
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+}
+.card-btn i {
+	margin: 0 10px 5px;
 }
